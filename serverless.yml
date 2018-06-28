@@ -1,0 +1,21 @@
+service: rss-hugtech-io
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+package:
+ include:
+   - node_modules/**
+   - src/**
+ exclude:
+   - /**
+
+functions:
+  parse:
+    handler: src/handler.parse
+    events:
+      - http:
+          path: rss
+          method: get
+          cors: true
